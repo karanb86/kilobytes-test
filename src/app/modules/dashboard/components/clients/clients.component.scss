@@ -47,15 +47,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .jumper {
+      color: #337CBD;
+    }
+
+    .disabled {
+      color: #8c8c8c;
+      cursor: default;
+    }
+
     & >* {
       font-size: 20px;
       font-weight: bold;
-      margin: 0 4px;
+      margin: 0 8px;
       cursor: pointer;
     }
 
     .active {
       color: #337CBD;
+      cursor: default;
     }
   }
 }

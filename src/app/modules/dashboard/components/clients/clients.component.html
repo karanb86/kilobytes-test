@@ -22,10 +22,12 @@
   </div>
 
 
-  <div class="pagination-control">
+  <div class="pagination-control" *ngIf="(clients$ | async)?.length > 0">
+    <span class="jumper" [ngClass]="{'disabled': selectedPage === 1}" (click)="onPageChange(selectedPage - 1)"><</span>
     <ng-container *ngFor="let page of getPages(metaData?.page_count); let i = index">
       <span [ngClass]="{'active': selectedPage === i+1}" (click)="onPageChange(i+1)">{{i + 1}}</span>
     </ng-container>
+    <span class="jumper" [ngClass]="{'disabled': selectedPage === metaData?.page_count}" (click)="onPageChange(selectedPage + 1)">></span>
   </div>
 
   <span *ngIf="(clients$ | async)?.length === 0 && loaded">NO CLIENTS FOUND</span>

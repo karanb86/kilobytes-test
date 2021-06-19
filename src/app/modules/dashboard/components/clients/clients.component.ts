@@ -50,9 +50,11 @@ export class ClientsComponent implements OnInit, OnDestroy {
   }
 
   onPageChange(page: number): void {
-    this.selectedPage = page;
-    if (!(this.clients$.value.length > this.metaData.per_page * (page - 1))) {
-      this.clientsStoreService.fetchMoreClients(page);
+    if (page <= this.metaData?.page_count && page > 0) {
+      this.selectedPage = page;
+      if (!(this.clients$.value.length > this.metaData.per_page * (page - 1))) {
+        this.clientsStoreService.fetchMoreClients(page);
+      }
     }
   }
 
