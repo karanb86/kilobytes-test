@@ -1,0 +1,61 @@
+.clients-component {
+  padding: 20px;
+
+  h1 {
+    color: #337CBD;
+  }
+  .clients-list {
+    margin-top: 40px;
+    .each {
+      display: flex;
+      justify-content: space-around;
+      padding: 5px 0;
+      border-left: 1px solid;
+      border-right: 1px solid;
+      border-bottom: 1px solid;
+      transition: all 0.1s;
+      span {
+        align-self: center;
+        width: 200px;
+        max-width: 200px;
+      }
+      .members {
+        display: flex;
+        flex-direction: column;
+      }
+      &:hover {
+        background: #D3D3D3;
+        cursor: pointer;
+      }
+    }
+    .table-header {
+      border-top: 1px solid;
+      height: 48px;
+      align-items: center;
+      span {
+        font-weight: bold;
+      }
+      &:hover {
+        background: transparent;
+        cursor: default;
+      }
+    }
+  }
+  .pagination-control {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & >* {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0 4px;
+      cursor: pointer;
+    }
+
+    .active {
+      color: #337CBD;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<div class="login-component">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="each">
+      <label for="email">Email</label>
+      <input [formControl]="controls.email" type="email" id="email">
+    </div>
+    <div class="each">
+      <label for="password">Password</label>
+      <input [formControl]="controls.password" type="password" id="password">
+    </div>
+
+    <div class="each">
+      <button [disabled]="loading$ | async" type="submit">{{(loading$ | async) ? 'Signing you in...' : 'Sign In'}}</button>
+    </div>
+  </form>
+</div>

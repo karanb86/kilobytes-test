@@ -1,0 +1,32 @@
+<div class="clients-component">
+  <h1>Our Clients</h1>
+  <div class="clients-list">
+    <div class="each table-header">
+      <span>{{'Client ID' | uppercase}}</span>
+      <span>{{'Name' | uppercase}}</span>
+      <span>{{'Created At' | uppercase}}</span>
+      <span>{{'Assigned Members' | uppercase}}</span>
+    </div>
+    <ng-container *ngFor="let client of getSlicedClients(clients$ | async)">
+      <div class="each" (click)="onOpenClient(client)">
+        <span>{{client?.clientID}}</span>
+        <span>{{client?.name}}</span>
+        <span>{{getFormattedDate(client?.createdAt)}}</span>
+        <span class="members">
+          <ng-container *ngFor="let member of getAssignedMembers(client?.assignedMembers)">
+            <span>{{member}}</span>
+          </ng-container>
+        </span>
+      </div>
+    </ng-container>
+  </div>
+
+
+  <div class="pagination-control">
+    <ng-container *ngFor="let page of getPages(metaData?.page_count); let i = index">
+      <span [ngClass]="{'active': selectedPage === i+1}" (click)="onPageChange(i+1)">{{i + 1}}</span>
+    </ng-container>
+  </div>
+
+  <span *ngIf="(clients$ | async)?.length === 0 && loaded">NO CLIENTS FOUND</span>
+</div>
