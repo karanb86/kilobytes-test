@@ -20,6 +20,11 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
+  put<T>(path: string, body: { [key: string]: any } = {}): Observable<T> {
+    return this.http.put<T>(`${environment.base_url}${path}`, body)
+      .pipe(catchError(this.formatErrors));
+  }
+
   private formatErrors = (error: any) => {
     if (error.status === 401) {
       console.error(error);

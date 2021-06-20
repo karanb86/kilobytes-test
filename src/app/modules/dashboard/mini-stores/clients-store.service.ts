@@ -17,7 +17,7 @@ export class ClientsStoreService {
   constructor(private clientsService: ClientsService) {
   }
 
-  fetchClients(): void {
+  fetchClients(): Observable<boolean> {
     this.loading = true;
     if (this.clients.value.length === 0 && !this.loaded) {
       this.clientsService.loadClients()
@@ -27,20 +27,21 @@ export class ClientsStoreService {
             return {
               clientID: client?.clientID,
               name: client?.name,
-              id: client?._id,
+              companyId: client?._id,
               createdAt: client?.createdAt,
               assignedMembers: client?.assignedMembers,
               fullData: client
             };
           }), _metaData];
         }))
-        .subscribe(([clients, metaData]) => {
+        .subscribe(([clients, metaData]: [Client[], ClientsInfo]) => {
           this.clients.next(clients);
           this.clientsInfo.next(metaData);
           this.loaded = true;
           this.loading = false;
         });
     }
+    return of(this.loaded);
   }
 
   fetchMoreClients(pageNo: number, size = 20): void {
@@ -61,14 +62,14 @@ export class ClientsStoreService {
           return {
             clientID: client?.clientID,
             name: client?.name,
-            id: client?._id,
+            companyId: client?._id,
             createdAt: client?.createdAt,
             assignedMembers: client?.assignedMembers,
             fullData: client
           };
         }), _metaData];
       }))
-      .subscribe(([newClients, metaData]) => {
+      .subscribe(([newClients, metaData]: [Client[], ClientsInfo]) => {
         const oldClients = this.clients.value;
         this.clients.next(filterAndConcat(newClients, oldClients));
         this.clientsInfo.next(metaData);

@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {ClientsInfo, ClientsStoreService} from '../../mini-stores/clients-store.service';
 import * as moment from 'moment';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-clients',
@@ -16,18 +17,19 @@ export class ClientsComponent implements OnInit, OnDestroy {
   loaded = false;
   metaData: ClientsInfo = null;
   selectedPage = 1;
-  constructor(private clientsStoreService: ClientsStoreService) {
+  constructor(private clientsStoreService: ClientsStoreService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.clientsStoreService.fetchClients();
+    this.clientsStoreService.getMetaData()
+      .subscribe(res => this.metaData = res);
     this.clientsStoreService.getLoadingLoaded()
       .subscribe(({loading, loaded}) => {
         this.loading = loading;
         this.loaded = loaded;
     });
-    this.clientsStoreService.getMetaData()
-      .subscribe(res => this.metaData = res);
     this.clientsStoreService.getClients().subscribe(clients => {
       this.clients$.next(clients);
     });
@@ -46,7 +48,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
   }
 
   onOpenClient(client: Client): void {
-    console.error(client);
+    this.router.navigate([`${client.companyId}`], {relativeTo: this.route}).then();
   }
 
   onPageChange(page: number): void {
@@ -71,7 +73,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
 export interface Client {
   clientID: string;
   name: string;
-  id: string;
+  companyId: string;
   createdAt: string;
   assignedMembers: any[];
   fullData?: any;

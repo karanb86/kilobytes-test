@@ -1,0 +1,76 @@
+.client-details-component {
+  padding: 20px;
+
+  h1 {
+    color: #337CBD;
+    .go-back {
+      margin-right: 10px;
+      color: #337CBD;
+      cursor: pointer;
+    }
+  }
+
+  .file-mapping {
+    margin-top: 40px;
+    h3 {
+      color: #337CBD;
+    }
+    img {
+      margin-top: 20px;
+      height: 200px;
+      width: 150px;
+    }
+  }
+
+  .documents-list-wrap {
+    margin-top: 40px;
+    h3 {
+      color: #337CBD;
+    }
+    .documents-list {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+
+      .each {
+        cursor: pointer;
+        margin: 20px;
+        box-shadow: 1px 1px 5px -1px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 1px 1px 5px -1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 5px -1px rgba(0,0,0,0.75);
+        height: 200px;
+        width: 150px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+
+        h5, h6 {
+          max-width: 80%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        h6 {
+          margin-top: 8px;
+          color: #57a9ff;
+        }
+      }
+
+      .remove-pointer {
+        cursor: default;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .no-docs {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

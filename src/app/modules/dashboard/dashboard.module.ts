@@ -6,10 +6,12 @@ import {ClientsService} from './services/clients.service';
 import {ClientsResolver} from './resolvers/clients.resolver';
 import {SharedModule} from '../shared/shared.module';
 import {ClientsStoreService} from './mini-stores/clients-store.service';
+import { ClientDetailsComponent } from './components/client-details/client-details.component';
 
 const components = [
   DashboardContainerComponent,
-  ClientsComponent
+  ClientsComponent,
+  ClientDetailsComponent
 ];
 
 const modules = [

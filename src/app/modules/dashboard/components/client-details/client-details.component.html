@@ -1,0 +1,24 @@
+<div class="client-details-component">
+
+  <h1> <span class="go-back" (click)="onGoBack()"><</span>Company Documents</h1>
+
+  <div class="file-mapping"  *ngIf="(documents$ | async)?.length > 0 && !fileMapped">
+    <h3>File to be Mapped</h3>
+    <h4>Select any document from the docs list below to add this file to...</h4>
+    <img [src]="fileToMap?.folder[0]?.preview" alt="">
+  </div>
+
+  <div class="documents-list-wrap">
+    <h3>Docs List</h3>
+    <div class="documents-list">
+      <ng-container *ngFor="let document of documents$ | async">
+        <div class="each" [ngClass]="{'remove-pointer': fileMapped}" (click)="mapFileToThisFolder(document)">
+          <h5>{{document?.docType}}</h5>
+          <h6>{{document?.type}}</h6>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <h3 *ngIf="(documents$ | async)?.length === 0 && docsLoaded" class="no-docs">No Docs Found</h3>
+</div>
